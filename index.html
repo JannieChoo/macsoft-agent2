@@ -200,6 +200,17 @@
                 transform: translateY(0) scale(1);
             }
         }
+
+        .counter-number {
+            font-size: 3.5rem;
+            line-height: 1;
+        }
+
+        @media (min-width: 768px) {
+            .counter-number {
+                font-size: 4.5rem;
+            }
+        }
     </style>
 </head>
 <body x-data="macsoftApp()" class="selection:bg-violet-500/30 selection:text-white">
@@ -211,7 +222,6 @@
     >
         <div class="max-w-7xl mx-auto px-5 lg:px-8">
             <div class="flex items-center justify-between">
-                <!-- Logo -->
                 <a href="#home" class="flex items-center gap-3">
                     <div class="w-12 h-12 rounded-2xl overflow-hidden bg-white/10 border border-white/10 flex items-center justify-center shadow-lg">
                         <img src="MacSoft_logo.jpeg" alt="MacSoft Logo" class="w-full h-full object-contain p-1.5">
@@ -223,28 +233,26 @@
                     </div>
                 </a>
 
-                <!-- Desktop Nav -->
                 <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-300">
+                    <a href="#problem" class="hover:text-white transition">The Problem</a>
                     <a href="#how-it-works" class="hover:text-white transition">How It Works</a>
                     <a href="#features" class="hover:text-white transition">Features</a>
                     <a href="#solutions" class="hover:text-white transition">Solutions</a>
+                    <a href="#why-macsoft" class="hover:text-white transition">Why MacSoft</a>
                     <a href="#contact" class="hover:text-white transition">Contact</a>
                 </nav>
 
-                <!-- Desktop CTA -->
                 <div class="hidden lg:flex items-center gap-3">
                     <button onclick="scrollToSection('contact')" class="btn-primary px-6 py-2.5 rounded-full font-bold text-sm">
                         Request Demo
                     </button>
                 </div>
 
-                <!-- Mobile Menu Button -->
                 <button @click="mobileMenu = !mobileMenu" class="lg:hidden w-11 h-11 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center">
                     <i data-lucide="menu" class="w-5 h-5"></i>
                 </button>
             </div>
 
-            <!-- Mobile Menu -->
             <div
                 x-show="mobileMenu"
                 x-transition
@@ -253,9 +261,11 @@
                 style="display:none;"
             >
                 <div class="flex flex-col gap-3 text-sm text-gray-300">
+                    <a href="#problem" @click="mobileMenu=false" class="px-3 py-2 rounded-lg hover:bg-white/5">The Problem</a>
                     <a href="#how-it-works" @click="mobileMenu=false" class="px-3 py-2 rounded-lg hover:bg-white/5">How It Works</a>
                     <a href="#features" @click="mobileMenu=false" class="px-3 py-2 rounded-lg hover:bg-white/5">Features</a>
                     <a href="#solutions" @click="mobileMenu=false" class="px-3 py-2 rounded-lg hover:bg-white/5">Solutions</a>
+                    <a href="#why-macsoft" @click="mobileMenu=false" class="px-3 py-2 rounded-lg hover:bg-white/5">Why MacSoft</a>
                     <a href="#contact" @click="mobileMenu=false" class="px-3 py-2 rounded-lg hover:bg-white/5">Contact</a>
                     <button onclick="scrollToSection('contact')" class="btn-primary mt-2 px-5 py-3 rounded-xl font-bold">
                         Request Demo
@@ -312,10 +322,57 @@
                             <div class="text-sm text-gray-400">Data accuracy</div>
                         </div>
                         <div class="stat-pill rounded-2xl p-4">
-                            <div class="text-2xl font-extrabold">1</div>
+                            <div class="text-2xl font-extrabold">2 Seconds</div>
                             <div class="text-sm text-gray-400">Screenshot → AutoCount</div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE PROBLEM -->
+    <section id="problem" class="py-24 lg:py-32 bg-black/10">
+        <div class="max-w-7xl mx-auto px-5 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <div class="inline-flex px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20 text-red-300 font-semibold text-sm mb-5">
+                    The Challenge
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black mb-5">Manual data entry is costing you time and money</h2>
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    Every invoice you process manually takes time, introduces errors, and delays your financial reporting.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <div class="glass-panel glass-panel-hover rounded-[2rem] p-8 text-center" data-aos="fade-up" data-aos-delay="0">
+                    <div class="w-16 h-16 rounded-2xl bg-red-500/20 border border-red-500/20 flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="clock" class="w-7 h-7 text-red-300"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Hours wasted daily</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Finance teams spend 5-10 hours per week manually entering invoice data into accounting systems.
+                    </p>
+                </div>
+
+                <div class="glass-panel glass-panel-hover rounded-[2rem] p-8 text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 rounded-2xl bg-red-500/20 border border-red-500/20 flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="alert-triangle" class="w-7 h-7 text-red-300"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Costly data errors</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Manual entry leads to typos, incorrect amounts, and missed entries that affect your bottom line.
+                    </p>
+                </div>
+
+                <div class="glass-panel glass-panel-hover rounded-[2rem] p-8 text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 rounded-2xl bg-red-500/20 border border-red-500/20 flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="file-text" class="w-7 h-7 text-red-300"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Delayed reporting</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Slow data entry means you get financial insights late, missing opportunities for better decisions.
+                    </p>
                 </div>
             </div>
         </div>
@@ -334,7 +391,7 @@
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-6">
+            <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 <div class="glass-panel glass-panel-hover rounded-[2rem] p-8 text-center" data-aos="fade-up" data-aos-delay="0">
                     <div class="w-20 h-20 bg-violet-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl font-extrabold text-white shadow-lg shadow-violet-600/30">1</div>
                     <div class="w-16 h-16 rounded-2xl bg-violet-500/20 border border-violet-500/20 flex items-center justify-center mx-auto mb-4">
@@ -342,7 +399,7 @@
                     </div>
                     <h3 class="text-2xl font-bold mb-3">Screenshot Invoice</h3>
                     <p class="text-gray-400 leading-relaxed">
-                        Take a screenshot of any invoice, receipt, or bill.
+                        Take a screenshot of any invoice, receipt, or bill from emails, WhatsApp, or scanned documents.
                     </p>
                 </div>
 
@@ -353,7 +410,7 @@
                     </div>
                     <h3 class="text-2xl font-bold mb-3">AI Reads & Extracts</h3>
                     <p class="text-gray-400 leading-relaxed">
-                        AI analyzes and extracts vendor, date, amount, tax, and invoice details.
+                        AI analyzes the screenshot and extracts vendor, date, amount, tax, and all invoice details with high accuracy.
                     </p>
                 </div>
 
@@ -364,7 +421,7 @@
                     </div>
                     <h3 class="text-2xl font-bold mb-3">AutoCount Database Update</h3>
                     <p class="text-gray-400 leading-relaxed">
-                        Automatically create, update, or delete records in AutoCount.
+                        Automatically create, update, or delete records in your AutoCount database — no manual entry required.
                     </p>
                 </div>
             </div>
@@ -500,8 +557,57 @@
         </div>
     </section>
 
+    <!-- WHY MACSOFT -->
+    <section id="why-macsoft" class="py-24 lg:py-32 bg-black/10">
+        <div class="max-w-7xl mx-auto px-5 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <div class="inline-flex px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 font-semibold text-sm mb-5">
+                    Why Choose MacSoft
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black mb-5">Built for Malaysian businesses</h2>
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    We understand the unique challenges of Malaysian SMEs and designed our solution specifically for you.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                <div class="text-center" data-aos="fade-up" data-aos-delay="0">
+                    <div class="w-16 h-16 rounded-2xl bg-violet-500/20 border border-violet-500/20 flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="badge-check" class="w-7 h-7 text-violet-300"></i>
+                    </div>
+                    <h3 class="font-bold mb-2">AutoCount Certified</h3>
+                    <p class="text-sm text-gray-400">Fully integrated with AutoCount accounting software</p>
+                </div>
+
+                <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 rounded-2xl bg-cyan-500/20 border border-cyan-500/20 flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="shield-check" class="w-7 h-7 text-cyan-300"></i>
+                    </div>
+                    <h3 class="font-bold mb-2">Data Secure</h3>
+                    <p class="text-sm text-gray-400">Your financial data is encrypted and protected</p>
+                </div>
+
+                <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 rounded-2xl bg-emerald-500/20 border border-emerald-500/20 flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="clock" class="w-7 h-7 text-emerald-300"></i>
+                    </div>
+                    <h3 class="font-bold mb-2">Local Support</h3>
+                    <p class="text-sm text-gray-400">Malaysian team providing real-time local support</p>
+                </div>
+
+                <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 rounded-2xl bg-amber-500/20 border border-amber-500/20 flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="zap" class="w-7 h-7 text-amber-300"></i>
+                    </div>
+                    <h3 class="font-bold mb-2">Fast Implementation</h3>
+                    <p class="text-sm text-gray-400">Up and running within days, not months</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CONTACT -->
-    <footer id="contact" class="pt-24 lg:pt-32 pb-12">
+    <footer id="contact" class="pt-24 lg:pt-32 pb-12 bg-black/10">
         <div class="max-w-7xl mx-auto px-5 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-14 items-start">
                 <div data-aos="fade-up">
