@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MacSoft AI Agent | Intelligent SME Accounting Automation</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+    <!-- Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Alpine -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --primary-2: #a855f7;
+            --secondary: #06b6d4;
+            --accent: #10b981;
+            --dark: #050816;
+            --dark-2: #0b1020;
+            --card: rgba(255,255,255,0.04);
+            --border: rgba(255,255,255,0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background:
+                radial-gradient(circle at top right, rgba(124,58,237,0.16), transparent 25%),
+                radial-gradient(circle at bottom left, rgba(6,182,212,0.10), transparent 20%),
+                linear-gradient(180deg, #050816 0%, #070b17 35%, #0a1020 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .text-gradient {
+            background: linear-gradient(90deg, #ffffff 0%, #c4b5fd 30%, #a855f7 70%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .purple-gradient {
+            background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #06b6d4 100%);
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.045);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.25),
+                inset 0 1px 0 rgba(255,255,255,0.04);
+        }
+
+        .glass-panel-hover {
+            transition: all 0.35s ease;
+        }
+
+        .glass-panel-hover:hover {
+            transform: translateY(-8px);
+            border-color: rgba(168, 85, 247, 0.35);
+            box-shadow:
+                0 20px 50px rgba(124,58,237,0.18),
+                inset 0 1px 0 rgba(255,255,255,0.05);
+        }
+
+        .hero-glow {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero-glow::before,
+        .hero-glow::after {
+            content: "";
+            position: absolute;
+            border-radius: 999px;
+            filter: blur(90px);
+        }
+
+        .hero-glow::before {
+            width: 420px;
+            height: 420px;
+            top: 10%;
+            left: -5%;
+            background: rgba(124,58,237,0.22);
+        }
+
+        .hero-glow::after {
+            width: 420px;
+            height: 420px;
+            right: -5%;
+            bottom: 5%;
+            background: rgba(6,182,212,0.16);
+        }
+
+        .nav-blur {
+            background: rgba(5, 8, 22, 0.72);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(124,58,237,0.28);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 36px rgba(124,58,237,0.36);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(168,85,247,0.4);
+            transform: translateY(-2px);
+        }
+
+        .section-line {
+            background: linear-gradient(90deg, transparent, rgba(168,85,247,0.4), transparent);
+            height: 1px;
+            width: 100%;
+        }
+
+        .feature-card-icon {
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 20px rgba(0,0,0,0.18);
+        }
+
+        .stat-pill {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 24px;
+            top: 24px;
+            bottom: 24px;
+            width: 2px;
+            background: linear-gradient(to bottom, rgba(124,58,237,0.5), rgba(6,182,212,0.2));
+        }
+
+        .floating-badge {
+            animation: floatY 4s ease-in-out infinite;
+        }
+
+        @keyframes floatY {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .marquee {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 1.5rem;
+            width: max-content;
+            animation: marquee 22s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .hero-image {
+            background:
+                linear-gradient(180deg, rgba(124,58,237,0.16), rgba(6,182,212,0.08)),
+                radial-gradient(circle at top, rgba(255,255,255,0.08), transparent 60%);
+        }
+
+        .grid-overlay {
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+
+        .input-style {
+            width: 100%;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.10);
+            color: white;
+            border-radius: 1rem;
+            padding: 1rem 1.1rem;
+            outline: none;
+            transition: all 0.25s ease;
+        }
+
+        .input-style::placeholder {
+            color: rgba(255,255,255,0.45);
+        }
+
+        .input-style:focus {
+            border-color: rgba(168,85,247,0.7);
+            box-shadow: 0 0 0 4px rgba(168,85,247,0.12);
+            background: rgba(255,255,255,0.06);
+        }
+
+        .mobile-menu-enter {
+            animation: fadeInUp 0.25s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(-12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-toast {
+            animation: toastIn 0.35s ease;
+        }
+
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateY(18px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+    </style>
+</head>
+<body x-data="macsoftApp()" class="selection:bg-violet-500/30 selection:text-white">
+
+    <!-- NAVBAR -->
+    <header
+        class="fixed top-0 left-0 w-full z-50 transition-all duration-300"
+        :class="scrolled ? 'nav-blur border-b border-white/10 shadow-lg shadow-black/20 py-3' : 'bg-transparent py-5'"
+    >
+        <div class="max-w-7xl mx-auto px-5 lg:px-8">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="#home" class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl overflow-hidden bg-white/10 border border-white/10 flex items-center justify-center shadow-lg">
+                        <img src="MacSoft_logo.png" alt="MacSoft Logo" class="w-full h-full object-contain p-1.5">
+                    </div>
+                    <div>
+                        <div class="text-xl md:text-2xl font-extrabold tracking-tight">
+                            MacSoft <span class="text-violet-400">AI</span>
+                        </div>
+                        <div class="text-[11px] uppercase tracking-[0.22em] text-gray-400 -mt-0.5">
+                            Accounting Automation
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-300">
+                    <a href="#about" class="hover:text-white transition">About</a>
+                    <a href="#features" class="hover:text-white transition">Features</a>
+                    <a href="#process" class="hover:text-white transition">Workflow</a>
+                    <a href="#contact" class="hover:text-white transition">Contact</a>
+                </nav>
+
+                <!-- Desktop CTA -->
+                <div class="hidden lg:flex items-center gap-3">
+                    <button onclick="scrollToSection('contact')" class="btn-secondary px-5 py-2.5 rounded-full font-semibold text-sm">
+                        Talk to Sales
+                    </button>
+                    <button onclick="scrollToSection('contact')" class="btn-primary px-6 py-2.5 rounded-full font-bold text-sm">
+                        Deploy Agent
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button @click="mobileMenu = !mobileMenu" class="lg:hidden w-11 h-11 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div
+                x-show="mobileMenu"
+                x-transition
+                @click.outside="mobileMenu = false"
+                class="lg:hidden mt-4 glass-panel rounded-2xl p-4 mobile-menu-enter"
+                style="display:none;"
+            >
+                <div class="flex flex-col gap-3 text-sm text-gray-300">
+                    <a href="#about" @click="mobileMenu=false" class="px-3 py-2 rounded-lg hover:bg-white/5">About</a>
+                    <a href="#features" @click="mobileMenu=false" class="px-3 py-2 rounded-lg hover:bg-white/5">Features</a>
+                    <a href="#process" @click="mobileMenu=false" class="px-3 py-2 rounded-lg hover:bg-white/5">Workflow</a>
+                    <a href="#contact" @click="mobileMenu=false" class="px-3 py-2 rounded-lg hover:bg-white/5">Contact</a>
+                    <button onclick="scrollToSection('contact')" class="btn-primary mt-2 px-5 py-3 rounded-xl font-bold">
+                        Deploy Agent
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section id="home" class="relative min-h-screen pt-32 lg:pt-36 overflow-hidden">
+        <div class="hero-glow"></div>
+        <div class="absolute inset-0 grid-overlay opacity-40"></div>
+
+        <div class="max-w-7xl mx-auto px-5 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-14 items-center min-h-[85vh]">
+                <!-- LEFT -->
+                <div data-aos="fade-right">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-400/20 text-violet-300 text-xs md:text-sm font-bold tracking-wide mb-6">
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-violet-500"></span>
+                        </span>
+                        BUILT FOR MALAYSIAN SMEs • AUTOCOUNT READY • AI OCR AUTOMATION
+                    </div>
+
+                    <h1 class="text-5xl md:text-6xl xl:text-7xl font-black leading-[1.02] tracking-tight mb-6">
+                        Turn receipts, invoices & bookkeeping into a <span class="text-gradient">fully automated workflow.</span>
+                    </h1>
+
+                    <p class="text-lg md:text-xl text-gray-300/90 leading-relaxed max-w-2xl mb-8">
+                        MacSoft AI Agent helps SMEs digitise accounting operations with intelligent OCR, document extraction,
+                        expense categorisation, approval workflows, and direct AutoCount-ready output — reducing manual work,
+                        human error, and month-end stress.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 mb-10">
+                        <button onclick="scrollToSection('contact')" class="btn-primary px-8 py-4 rounded-2xl font-bold text-base md:text-lg flex items-center gap-3">
+                            Book a Live Demo
+                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </button>
+
+                        <button onclick="scrollToSection('about')" class="btn-secondary px-8 py-4 rounded-2xl font-bold text-base md:text-lg flex items-center gap-3">
+                            Our Vision
+                            <i data-lucide="sparkles" class="w-5 h-5"></i>
+                        </button>
+
+                        <button onclick="scrollToSection('features')" class="btn-secondary px-8 py-4 rounded-2xl font-bold text-base md:text-lg flex items-center gap-3">
+                            Explore Features
+                            <i data-lucide="layout-grid" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+
+                    <div class="grid sm:grid-cols-3 gap-4 max-w-3xl">
+                        <div class="stat-pill rounded-2xl p-4">
+                            <div class="text-2xl font-extrabold">99%+</div>
+                            <div class="text-sm text-gray-400">OCR extraction accuracy on structured documents</div>
+                        </div>
+                        <div class="stat-pill rounded-2xl p-4">
+                            <div class="text-2xl font-extrabold">85%</div>
+                            <div class="text-sm text-gray-400">Reduction in manual accounting admin workload</div>
+                        </div>
+                        <div class="stat-pill rounded-2xl p-4">
+                            <div class="text-2xl font-extrabold">Faster Closing</div>
+                            <div class="text-sm text-gray-400">Accelerate month-end processing and document reconciliation</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT -->
+                <div class="relative" data-aos="fade-left">
+                    <div class="glass-panel rounded-[2rem] lg:rounded-[2.5rem] p-4 md:p-5 hero-image shadow-2xl shadow-violet-950/20">
+                        <div class="rounded-[1.5rem] overflow-hidden border border-white/10 bg-[#0a1020]">
+                            <div class="grid md:grid-cols-5 min-h-[520px]">
+                                <!-- Mock Dashboard Left -->
+                                <div class="md:col-span-3 p-6 md:p-7 bg-gradient-to-br from-[#0b1020] via-[#0f172a] to-[#10172f]">
+                                    <div class="flex items-center justify-between mb-6">
+                                        <div>
+                                            <div class="text-sm uppercase tracking-[0.25em] text-violet-300/80">MacSoft AI Dashboard</div>
+                                            <h3 class="text-2xl font-bold mt-1">Finance Automation Overview</h3>
+                                        </div>
+                                        <div class="w-11 h-11 rounded-2xl bg-violet-500/15 border border-violet-400/20 flex items-center justify-center">
+                                            <i data-lucide="bot" class="w-5 h-5 text-violet-300"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 gap-4 mb-5">
+                                        <div class="glass-panel rounded-2xl p-4">
+                                            <div class="text-xs text-gray-400 uppercase tracking-[0.18em] mb-2">Documents Processed</div>
+                                            <div class="text-3xl font-black">12,480</div>
+                                            <div class="text-sm text-emerald-400 mt-1">+18.4% this month</div>
+                                        </div>
+                                        <div class="glass-panel rounded-2xl p-4">
+                                            <div class="text-xs text-gray-400 uppercase tracking-[0.18em] mb-2">Auto-Posted Entries</div>
+                                            <div class="text-3xl font-black">3,906</div>
+                                            <div class="text-sm text-cyan-400 mt-1">GL / AP / expense workflows</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="glass-panel rounded-2xl p-5 mb-4">
+                                        <div class="flex items-center justify-between mb-4">
+                                            <div>
+                                                <div class="text-sm font-semibold">Receipt & Invoice Processing Pipeline</div>
+                                                <div class="text-xs text-gray-400">Daily automation throughput</div>
+                                            </div>
+                                            <span class="text-xs px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/20">
+                                                Live
+                                            </span>
+                                        </div>
+
+                                        <div class="space-y-3">
+                                            <div>
+                                                <div class="flex justify-between text-xs text-gray-400 mb-1">
+                                                    <span>OCR Extraction</span>
+                                                    <span>96%</span>
+                                                </div>
+                                                <div class="w-full h-2 rounded-full bg-white/5 overflow-hidden">
+                                                    <div class="h-full rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500" style="width:96%"></div>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div class="flex justify-between text-xs text-gray-400 mb-1">
+                                                    <span>Vendor Recognition</span>
+                                                    <span>91%</span>
+                                                </div>
+                                                <div class="w-full h-2 rounded-full bg-white/5 overflow-hidden">
+                                                    <div class="h-full rounded-full bg-gradient-to-r from-cyan-500 to-blue-500" style="width:91%"></div>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div class="flex justify-between text-xs text-gray-400 mb-1">
+                                                    <span>Auto Classification</span>
+                                                    <span>88%</span>
+                                                </div>
+                                                <div class="w-full h-2 rounded-full bg-white/5 overflow-hidden">
+                                                    <div class="h-full rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500" style="width:88%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="glass-panel rounded-2xl p-4">
+                                        <div class="text-sm font-semibold mb-3">Recent AI Actions</div>
+                                        <div class="space-y-3 text-sm text-gray-300">
+                                            <div class="flex items-start gap-3">
+                                                <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 mt-1.5"></div>
+                                                <p>Processed 42 expense receipts and matched 37 vendor records.</p>
+                                            </div>
+                                            <div class="flex items-start gap-3">
+                                                <div class="w-2.5 h-2.5 rounded-full bg-violet-400 mt-1.5"></div>
+                                                <p>Prepared AutoCount-ready journal entries for approval queue.</p>
+                                            </div>
+                                            <div class="flex items-start gap-3">
+                                                <div class="w-2.5 h-2.5 rounded-full bg-cyan-400 mt-1.5"></div>
+                                                <p>Flagged 4 documents with missing tax fields for human review.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Mock Right Panel -->
+                                <div class="md:col-span-2 border-l border-white/8 bg-black/20 p-5 md:p-6">
+                                    <div class="glass-panel rounded-2xl p-4 mb-4">
+                                        <div class="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">AI Status</div>
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-10 h-10 rounded-2xl bg-violet-500/15 border border-violet-500/20 flex items-center justify-center">
+                                                <i data-lucide="sparkles" class="w-5 h-5 text-violet-300"></i>
+                                            </div>
+                                            <div>
+                                                <div class="font-bold">MacSoft Agent Online</div>
+                                                <div class="text-xs text-emerald-400">Actively monitoring accounting inputs</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="glass-panel rounded-2xl p-4 mb-4">
+                                        <div class="text-sm font-semibold mb-3">Automation Coverage</div>
+                                        <div class="space-y-3 text-sm">
+                                            <div class="flex justify-between">
+                                                <span class="text-gray-400">Receipts</span>
+                                                <span>92%</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-gray-400">Invoices</span>
+                                                <span>89%</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-gray-400">Claims / Petty Cash</span>
+                                                <span>86%</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-gray-400">Expense Coding</span>
+                                                <span>84%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="glass-panel rounded-2xl p-4">
+                                        <div class="text-sm font-semibold mb-3">Why teams choose MacSoft</div>
+                                        <ul class="space-y-3 text-sm text-gray-300">
+                                            <li class="flex gap-2">
+                                                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 mt-0.5"></i>
+                                                <span>Fewer manual entries and repetitive admin tasks</span>
+                                            </li>
+                                            <li class="flex gap-2">
+                                                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 mt-0.5"></i>
+                                                <span>Cleaner supporting documents for audit and finance review</span>
+                                            </li>
+                                            <li class="flex gap-2">
+                                                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 mt-0.5"></i>
+                                                <span>Faster approval workflows and better expense visibility</span>
+                                            </li>
+                                            <li class="flex gap-2">
+                                                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 mt-0.5"></i>
+                                                <span>Designed to complement AutoCount-based operations</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating badge -->
+                    <div class="hidden md:block absolute -bottom-8 -left-6 glass-panel rounded-3xl p-5 floating-badge border border-violet-500/20">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/20 flex items-center justify-center">
+                                <i data-lucide="trending-up" class="text-emerald-400 w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-black">Month-End, Faster.</div>
+                                <div class="text-sm text-gray-400">Reduce repetitive bookkeeping and document chasing.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick CTA Row -->
+            <div class="mt-10 lg:mt-6 flex flex-wrap gap-4 justify-center lg:justify-start">
+                <button onclick="scrollToSection('process')" class="btn-secondary px-6 py-3 rounded-xl font-semibold flex items-center gap-2">
+                    <i data-lucide="workflow" class="w-4 h-4"></i>
+                    View Workflow
+                </button>
+                <button onclick="scrollToSection('contact')" class="btn-secondary px-6 py-3 rounded-xl font-semibold flex items-center gap-2">
+                    <i data-lucide="messages-square" class="w-4 h-4"></i>
+                    Case Highlights
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT / PROBLEM -->
+    <section id="about" class="py-24 lg:py-32">
+        <div class="max-w-7xl mx-auto px-5 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <div class="inline-flex px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-violet-300 font-semibold mb-5">
+                    Why MacSoft AI Agent
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black mb-5">Modern SMEs need accounting operations that can scale without scaling admin chaos.</h2>
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    Finance teams are buried under receipts, invoices, approvals, manual coding, and repetitive data entry.
+                    MacSoft AI Agent is designed to reduce that operational drag so your team can focus on accuracy, decisions, and growth.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass-panel glass-panel-hover rounded-[2rem] p-8" data-aos="fade-up" data-aos-delay="0">
+                    <div class="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-6 feature-card-icon">
+                        <i data-lucide="file-clock" class="text-red-400 w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Manual Data Entry Bottlenecks</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Teams waste hours keying receipt, invoice and expense data into accounting systems, creating delays in approvals,
+                        reimbursements and month-end close.
+                    </p>
+                </div>
+
+                <div class="glass-panel glass-panel-hover rounded-[2rem] p-8" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center mb-6 feature-card-icon">
+                        <i data-lucide="shield-alert" class="text-orange-400 w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Human Error & Inconsistent Coding</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Mistyped amounts, missing fields, duplicate claims and inconsistent expense coding affect reporting quality and
+                        create unnecessary reconciliation work later.
+                    </p>
+                </div>
+
+                <div class="glass-panel glass-panel-hover rounded-[2rem] p-8" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 rounded-2xl bg-fuchsia-500/10 border border-fuchsia-500/20 flex items-center justify-center mb-6 feature-card-icon">
+                        <i data-lucide="folder-search-2" class="text-fuchsia-400 w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Scattered Documents & Poor Visibility</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Finance documents live across phones, WhatsApp, email, PDFs and paper files. Without structure, audit preparation
+                        and operational control become harder than they should be.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="py-24 lg:py-32 bg-black/10">
+        <div class="max-w-7xl mx-auto px-5 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16">
+                <div class="max-w-3xl" data-aos="fade-up">
+                    <div class="inline-flex px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 font-semibold text-sm mb-5">
+                        Platform Capabilities
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-black mb-4">
+                        Built to automate the accounting tasks that consume your team every week.
+                    </h2>
+                    <p class="text-lg text-gray-400">
+                        MacSoft AI Agent combines document capture, OCR extraction, validation logic, categorisation,
+                        approval support and AutoCount-ready output in one streamlined workflow.
+                    </p>
+                </div>
+
+                <button onclick="scrollToSection('contact')" class="btn-primary px-7 py-4 rounded-2xl font-bold whitespace-nowrap">
+                    Request a Product Walkthrough
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-auto">
+                <!-- Big card -->
+                <div class="md:col-span-7 glass-panel glass-panel-hover rounded-[2rem] p-8 md:p-10 relative overflow-hidden" data-aos="fade-up">
+                    <div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-violet-500/10 blur-3xl"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 rounded-2xl bg-violet-500/12 border border-violet-500/20 flex items-center justify-center mb-6 feature-card-icon">
+                            <i data-lucide="scan-eye" class="w-8 h-8 text-violet-300"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-4">AI Receipt, Invoice & Document OCR</h3>
+                        <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                            Upload PDFs, scan receipts, or capture invoices from mobile devices. MacSoft AI extracts supplier names,
+                            invoice numbers, dates, tax values, totals and supporting line-item details for faster processing.
+                        </p>
+
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div class="rounded-2xl bg-white/4 border border-white/8 p-4">
+                                <div class="font-semibold mb-1">Multi-format capture</div>
+                                <div class="text-sm text-gray-400">Paper receipts, PDF invoices, expense claims, emailed documents and digital uploads.</div>
+                            </div>
+                            <div class="rounded-2xl bg-white/4 border border-white/8 p-4">
+                                <div class="font-semibold mb-1">Structured extraction</div>
+                                <div class="text-sm text-gray-400">Amounts, dates, vendor names, tax data, references and document metadata.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card -->
+                <div class="md:col-span-5 glass-panel glass-panel-hover rounded-[2rem] p-8" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-500/12 border border-emerald-500/20 flex items-center justify-center mb-6 feature-card-icon">
+                        <i data-lucide="refresh-cw" class="w-7 h-7 text-emerald-300"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">AutoCount-Ready Integration Workflow</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Prepare validated accounting data for smoother posting into AutoCount workflows including expenses,
+                        payables support, transaction references and supporting documentation alignment.
+                    </p>
+                </div>
+
+                <!-- Card -->
+                <div class="md:col-span-4 glass-panel glass-panel-hover rounded-[2rem] p-8" data-aos="fade-up">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/12 border border-cyan-500/20 flex items-center justify-center mb-6 feature-card-icon">
+                        <i data-lucide="brain-circuit" class="w-7 h-7 text-cyan-300"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Smart Categorisation</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        The AI can recommend or automate expense categorisation and accounting mappings based on historical behaviour,
+                        supplier patterns and workflow rules.
+                    </p>
+                </div>
+
+                <!-- Card -->
+                <div class="md:col-span-4 glass-panel glass-panel-hover rounded-[2rem] p-8" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 rounded-2xl bg-fuchsia-500/12 border border-fuchsia-500/20 flex items-center justify-center mb-6 feature-card-icon">
+                        <i data-lucide="chart-column-big" class="w-7 h-7 text-fuchsia-300"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Finance Visibility & Reporting Support</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Track document volumes, pending approvals, processing performance and accounting activity through a cleaner
+                        operational dashboard for finance teams and management.
+                    </p>
+                </div>
+
+                <!-- Card -->
+                <div class="md:col-span-4 glass-panel glass-panel-hover rounded-[2rem] p-8" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-500/12 border border-amber-500/20 flex items-center justify-center mb-6 feature-card-icon">
+                        <i data-lucide="message-square-more" class="w-7 h-7 text-amber-300"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Internal Query & Support Automation</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Let staff quickly retrieve document status, accounting references and submission progress without chasing the finance team for updates.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="process" class="py-24 lg:py-32">
+        <div class="max-w-7xl mx-auto px-5 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-14 items-center">
+                <!-- LEFT -->
+                <div data-aos="fade-right">
+                    <div class="inline-flex px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 font-semibold text-sm mb-5">
+                        Intelligent Workflow
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-black mb-5 leading-tight">
+                        From receipt capture to accounting-ready output in a structured, trackable flow.
+                    </h2>
+                    <p class="text-lg text-gray-400 mb-10 leading-relaxed">
+                        MacSoft AI Agent is built to remove friction from the most repetitive parts of accounting operations —
+                        while still giving your team visibility, review checkpoints and control where needed.
+                    </p>
+
+                    <div class="relative pl-14">
+                        <div class="timeline-line"></div>
+
+                        <div class="relative mb-10">
+                            <div class="absolute left-[-56px] top-0 w-12 h-12 rounded-2xl bg-violet-500 border border-violet-400/30 flex items-center justify-center font-black shadow-lg shadow-violet-500/20">
+                                01
+                            </div>
+                            <h3 class="text-2xl font-bold mb-2">Capture & Upload</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                Submit receipts, invoices or supporting documents through mobile capture, bulk upload,
+                                email forwarding or internal submission channels.
+                            </p>
+                        </div>
+
+                        <div class="relative mb-10">
+                            <div class="absolute left-[-56px] top-0 w-12 h-12 rounded-2xl bg-cyan-500 border border-cyan-400/30 flex items-center justify-center font-black shadow-lg shadow-cyan-500/20">
+                                02
+                            </div>
+                            <h3 class="text-2xl font-bold mb-2">Extract, Validate & Classify</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                The AI reads document fields, checks data consistency, recognises vendors, identifies totals,
+                                and prepares categorisation suggestions or accounting mappings.
+                            </p>
+                        </div>
+
+                        <div class="relative mb-10">
+                            <div class="absolute left-[-56px] top-0 w-12 h-12 rounded-2xl bg-emerald-500 border border-emerald-400/30 flex items-center justify-center font-black shadow-lg shadow-emerald-500/20">
+                                03
+                            </div>
+                            <h3 class="text-2xl font-bold mb-2">Review & Approval Routing</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                Flag exceptions, route uncertain cases for review, and keep standard documents flowing through
+                                approval-ready processing without unnecessary back-and-forth.
+                            </p>
+                        </div>
+
+                        <div class="relative">
+                            <div class="absolute left-[-56px] top-0 w-12 h-12 rounded-2xl bg-fuchsia-500 border border-fuchsia-400/30 flex items-center justify-center font-black shadow-lg shadow-fuchsia-500/20">
+                                04
+                            </div>
+                            <h3 class="text-2xl font-bold mb-2">Sync & Archive</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                Push processed information into your accounting workflow and maintain cleaner digital records
+                                for retrieval, audit support and future finance operations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT -->
+                <div data-aos="fade-left" class="relative">
+                    <div class="glass-panel rounded-[2.2rem] p-6 md:p-8">
+                        <div class="rounded-[1.7rem] overflow-hidden border border-white/10 bg-gradient-to-br from-[#0d1327] to-[#09101d] p-6">
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <div class="text-xs uppercase tracking-[0.25em] text-gray-400">Workflow Preview</div>
+                                    <div class="text-2xl font-bold mt-1">MacSoft Processing Flow</div>
+                                </div>
+                                <div class="w-12 h-12 rounded-2xl bg-violet-500/15 border border-violet-500/20 flex items-center justify-center">
+                                    <i data-lucide="cpu" class="text-violet-300 w-6 h-6"></i>
+                                </div>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="glass-panel rounded-2xl p-4 flex items-center justify-between">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-11 h-11 rounded-2xl bg-violet-500/15 border border-violet-500/20 flex items-center justify-center">
+                                            <i data-lucide="scan-line" class="w-5 h-5 text-violet-300"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-semibold">Receipt Upload Queue</div>
+                                            <div class="text-sm text-gray-400">42 new documents received</div>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs px-3 py-1 rounded-full bg-violet-500/15 border border-violet-500/20 text-violet-300">Active</span>
+                                </div>
+
+                                <div class="glass-panel rounded-2xl p-4 flex items-center justify-between">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-11 h-11 rounded-2xl bg-cyan-500/15 border border-cyan-500/20 flex items-center justify-center">
+                                            <i data-lucide="search-check" class="w-5 h-5 text-cyan-300"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-semibold">AI Validation Layer</div>
+                                            <div class="text-sm text-gray-400">Vendor, amount and tax fields verified</div>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/20 text-cyan-300">Checking</span>
+                                </div>
+
+                                <div class="glass-panel rounded-2xl p-4 flex items-center justify-between">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-11 h-11 rounded-2xl bg-emerald-500/15 border border-emerald-500/20 flex items-center justify-center">
+                                            <i data-lucide="badge-check" class="w-5 h-5 text-emerald-300"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-semibold">Approval / Exception Routing</div>
+                                            <div class="text-sm text-gray-400">Only flagged items need human review</div>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/20 text-emerald-300">Ready</span>
+                                </div>
+
+                                <div class="glass-panel rounded-2xl p-4 flex items-center justify-between">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-11 h-11 rounded-2xl bg-fuchsia-500/15 border border-fuchsia-500/20 flex items-center justify-center">
+                                            <i data-lucide="database-zap" class="w-5 h-5 text-fuchsia-300"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-semibold">Accounting Output</div>
+                                            <div class="text-sm text-gray-400">Prepared for downstream finance processing</div>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs px-3 py-1 rounded-full bg-fuchsia-500/15 border border-fuchsia-500/20 text-fuchsia-300">Synced</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-6 rounded-2xl border border-white/8 bg-white/4 p-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-2xl bg-amber-500/15 border border-amber-500/20 flex items-center justify-center">
+                                        <i data-lucide="lightbulb" class="w-5 h-5 text-amber-300"></i>
+                                    </div>
+                                    <p class="text-sm text-gray-300">
+                                        Best suited for SMEs that want to reduce document handling, improve finance process visibility,
+                                        and modernise AutoCount-adjacent workflows without increasing admin headcount.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="absolute -top-6 -right-4 hidden xl:block glass-panel rounded-2xl p-4 floating-badge">
+                        <div class="text-xs uppercase tracking-[0.2em] text-gray-400 mb-1">Processing Gain</div>
+                        <div class="text-2xl font-black text-emerald-300">Less Admin. More Control.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <footer id="contact" class="pt-24 lg:pt-32 pb-12">
+        <div class="max-w-7xl mx-auto px-5 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-14 items-start">
+                <!-- LEFT -->
+                <div data-aos="fade-up">
+                    <div class="inline-flex px-4 py-2 rounded-full bg-white/5 border border-white/10 text-violet-300 font-semibold text-sm mb-5">
+                        Contact MacSoft
+                    </div>
+
+                    <h2 class="text-4xl md:text-6xl font-black leading-tight mb-6">
+                        Let’s build a smarter accounting workflow for your business.
+                    </h2>
+
+                    <p class="text-lg text-gray-400 leading-relaxed mb-8 max-w-2xl">
+                        If your team is still spending too much time on receipts, invoices, data entry, document chasing or repetitive
+                        finance admin, MacSoft AI Agent can help you redesign that workflow into something faster, cleaner and more scalable.
+                    </p>
+
+                    <div class="space-y-5">
+                        <div class="glass-panel rounded-2xl p-5 flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-violet-500/15 border border-violet-500/20 flex items-center justify-center shrink-0">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-violet-300"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-lg">Office Address</div>
+                                <div class="text-gray-400">
+                                    No.67A Jalan Pulai 21, Taman Pulai Utama, 81300 Skudai, Johor, Malaysia
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel rounded-2xl p-5 flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-cyan-500/15 border border-cyan-500/20 flex items-center justify-center shrink-0">
+                                <i data-lucide="phone" class="w-5 h-5 text-cyan-300"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-bold text-lg mb-1">Phone Support</div>
+                                <div class="text-gray-400">+607-5623111 / +6012-7228013</div>
+
+                                <div class="flex flex-wrap gap-3 mt-4">
+                                    <a href="tel:+6075623111" class="btn-secondary px-4 py-2 rounded-xl font-semibold inline-flex items-center gap-2">
+                                        <i data-lucide="phone-call" class="w-4 h-4"></i> Call Us
+                                    </a>
+                                    <a href="https://wa.me/60127228013" target="_blank" class="btn-secondary px-4 py-2 rounded-xl font-semibold inline-flex items-center gap-2">
+                                        <i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp Us
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel rounded-2xl p-5 flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/20 flex items-center justify-center shrink-0">
+                                <i data-lucide="globe" class="w-5 h-5 text-emerald-300"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-lg">Official Website</div>
+                                <a href="https://www.gpissolutions.com" target="_blank" class="text-emerald-300 hover:text-emerald-200 transition font-medium">
+                                    www.gpissolutions.com
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT FORM -->
+                <div data-aos="fade-up" class="glass-panel rounded-[2rem] p-6 md:p-8 lg:p-10">
+                    <div class="mb-6">
+                        <h3 class="text-3xl font-black mb-2">Request a Demo</h3>
+                        <p class="text-gray-400">
+                            Leave your details and tell us about your accounting workflow. We’ll get in touch for a walkthrough.
+                        </p>
+                    </div>
+
+                    <form id="demoForm" class="space-y-5">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold mb-2 text-gray-200">Full Name</label>
+                                <input id="name" type="text" class="input-style" placeholder="Your name">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-2 text-gray-200">Company</label>
+                                <input id="company" type="text" class="input-style" placeholder="Company name">
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold mb-2 text-gray-200">Business Email</label>
+                                <input id="email" type="email" class="input-style" placeholder="name@company.com">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-2 text-gray-200">Phone Number</label>
+                                <input id="phone" type="text" class="input-style" placeholder="+60 12-345 6789">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold mb-2 text-gray-200">What do you want to automate?</label>
+                            <textarea id="message" rows="5" class="input-style" placeholder="Example: receipt capture, invoice processing, AutoCount support, claims, approvals, finance document management..."></textarea>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button type="submit" class="btn-primary flex-1 py-4 rounded-2xl font-black text-base">
+                                Request Demo
+                            </button>
+                            <button type="button" onclick="fillDemoMessage()" class="btn-secondary px-6 py-4 rounded-2xl font-bold">
+                                Autofill Sample
+                            </button>
+                        </div>
+
+                        <p class="text-sm text-gray-500">
+                            This demo form currently shows a success message on the page. If you want, I can also help you connect it to
+                            <span class="text-violet-300">Formspree</span>, <span class="text-violet-300">Google Forms</span>, or a backend mail handler.
+                        </p>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bottom Footer -->
+            <div class="mt-20 pt-8 border-t border-white/8 flex flex-col lg:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+                <div class="flex flex-wrap items-center gap-2 text-center lg:text-left">
+                    <span class="font-bold text-white tracking-wide">MacSoft SDN BHD</span>
+                    <span>© 2024 All Rights Reserved.</span>
+                </div>
+
+                <div class="flex flex-wrap gap-6">
+                    <button onclick="showPolicy('privacy')" class="hover:text-white transition">Privacy Policy</button>
+                    <button onclick="showPolicy('terms')" class="hover:text-white transition">Terms of Service</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Toast -->
+    <div
+        x-show="showToast"
+        x-transition
+        class="fixed bottom-5 right-5 z-[999] success-toast"
+        style="display:none;"
+    >
+        <div class="glass-panel rounded-2xl px-5 py-4 max-w-sm border border-emerald-500/30 shadow-2xl shadow-emerald-900/20">
+            <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-emerald-500/15 border border-emerald-500/20 flex items-center justify-center shrink-0">
+                    <i data-lucide="badge-check" class="w-5 h-5 text-emerald-300"></i>
+                </div>
+                <div>
+                    <div class="font-bold text-white">Request submitted successfully</div>
+                    <p class="text-sm text-gray-400 mt-1">
+                        Thank you! Your request has been recorded on this page demo. You can now connect the form to email or Formspree if needed.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Alpine App
+        function macsoftApp() {
+            return {
+                scrolled: false,
+                mobileMenu: false,
+                showToast: false,
+                init() {
+                    window.addEventListener('scroll', () => {
+                        this.scrolled = window.scrollY > 40;
+                    });
+                }
+            };
+        }
+
+        // Smooth scroll helper
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Fill sample form content
+        function fillDemoMessage() {
+            document.getElementById('name').value = 'John Tan';
+            document.getElementById('company').value = 'ABC Trading Sdn Bhd';
+            document.getElementById('email').value = 'finance@abctrading.com';
+            document.getElementById('phone').value = '+60 12-345 6789';
+            document.getElementById('message').value =
+                'We want to automate receipt collection, invoice OCR extraction, expense coding, and document preparation for our accounting workflow. We currently use AutoCount and want to reduce manual finance admin.';
+        }
+
+        // Footer placeholder
+        function showPolicy(type) {
+            if (type === 'privacy') {
+                alert('Privacy Policy page is not added yet. You can replace this button with your real privacy policy link later.');
+            } else {
+                alert('Terms of Service page is not added yet. You can replace this button with your real terms page later.');
+            }
+        }
+
+        // Form submit
+        document.addEventListener('DOMContentLoaded', function () {
+            // icons
+            lucide.createIcons();
+
+            // AOS
+            AOS.init({
+                duration: 900,
+                once: true,
+                offset: 80
+            });
+
+            // Form logic
+            const form = document.getElementById('demoForm');
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const name = document.getElementById('name').value.trim();
+                const company = document.getElementById('company').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const message = document.getElementById('message').value.trim();
+
+                if (!name || !company || !email || !phone || !message) {
+                    alert('Please fill in all fields before submitting.');
+                    return;
+                }
+
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    alert('Please enter a valid email address.');
+                    return;
+                }
+
+                // success toast via Alpine root
+                const body = document.querySelector('body');
+                const alpineData = Alpine.$data(body);
+                alpineData.showToast = true;
+
+                form.reset();
+
+                setTimeout(() => {
+                    alpineData.showToast = false;
+                }, 4500);
+            });
+        });
+    </script>
+</body>
+</html>
